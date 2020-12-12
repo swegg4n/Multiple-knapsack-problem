@@ -1,20 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace MultipleKnapsackProblem
 {
     public class Knapsack
     {
-        public int Capacity { get; }
-        public List<Item> Items { get; set; } = new List<Item>();
+        public int WeightCapacity { get; }  //W
+        public List<Item> Items { get; set; } = new List<Item>();   //⊆I
 
 
         public Knapsack(int capacity)
         {
-            this.Capacity = capacity;
+            this.WeightCapacity = capacity;
         }
 
+
+        public void Print()
+        {
+
+
+            Debug.WriteLine("");
+        }
     }
 
 }
