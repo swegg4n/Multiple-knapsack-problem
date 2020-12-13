@@ -2,11 +2,14 @@
 {
     public class Item
     {
-        public Item(int weight, int value)
+        public Item(int id, int weight, int value)
         {
+            this.Id = id;
             this.Weight = weight;
             this.Value = value;
         }
+
+        public int Id { get; }
 
         public int Weight { get; }      //w
         public int Value { get; }       //p
