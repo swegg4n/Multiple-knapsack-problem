@@ -9,7 +9,7 @@ namespace MultipleKnapsackProblem
     public class Knapsack
     {
         public int WeightCapacity { get; }  //W
-        public List<Item> Items { get; set; } = new List<Item>();   //⊆I
+        public List<Item> Items { get; } = new List<Item>();   //⊆I
 
         public int TotalWeight { get { return Items.Sum(i => i.Weight); } }
         public int TotalValue { get { return Items.Sum(i => i.Value); } }
@@ -19,6 +19,21 @@ namespace MultipleKnapsackProblem
         public Knapsack(int capacity)
         {
             this.WeightCapacity = capacity;
+        }
+
+
+       
+        /// <summary>
+        /// Tries to add an item to the knapsack
+        /// </summary>
+        /// <returns>If the item was added or not</returns>
+        public bool TryAddItem(Item item)
+        {
+            if (TotalWeight + item.Weight > WeightCapacity)
+                return false;
+
+            Items.Add(item);
+            return true;
         }
 
 

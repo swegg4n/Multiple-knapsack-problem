@@ -39,6 +39,7 @@ namespace MultipleKnapsackProblem
 
             PrintInitialState();
 
+
             Console.ReadKey();
         }
 
@@ -73,21 +74,5 @@ namespace MultipleKnapsackProblem
             Console.WriteLine($"---------------\n\n\n");
         }
 
-
-
-
-        [Obsolete]
-        private static void PopulateKnapsacks_temp()
-        {
-            int id = 0;
-            for (int i = 0; i < random.Next(5, 10); i++)
-            {
-                knapsacks[0].Items.Add(new Item(id++, random.Next(0, 10), random.Next(0, 10)));
-            }
-            for (int i = 0; i < random.Next(5, 10); i++)
-            {
-                knapsacks[1].Items.Add(new Item(id++, random.Next(0, 10), random.Next(0, 10)));
-            }
-        }
     }
 }
