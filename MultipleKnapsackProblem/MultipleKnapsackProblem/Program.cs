@@ -1,17 +1,18 @@
 ﻿using ConsoleTables;
 using System;
+using System.Linq;
 
 namespace MultipleKnapsackProblem
 {
-    class Program
+    static class Program
     {
-        private static Knapsack[] knapsacks;        //J
-        private static Item[] items;        //I
+        public static Knapsack[] Knapsacks { get; private set; }     //J
+        public static Item[] Items { get; private set; }      //I
 
         private static Random random = new Random();
 
 
-        private static int numberOfItems = 20;
+        private static int numberOfItems = 40;
         private static int numberOfKnapsacks = 5;
 
         private static int w_min = 1;   //min weight
@@ -27,18 +28,19 @@ namespace MultipleKnapsackProblem
         {
             int id = 0;
 
-            items = new Item[numberOfItems];
-            for (int i = 0; i < items.Length; i++)
-                items[i] = new Item(id++, random.Next(w_min, w_max + 1), random.Next(p_min, p_max + 1));
+            Items = new Item[numberOfItems];
+            for (int i = 0; i < Items.Length; i++)
+                Items[i] = new Item(id++, random.Next(w_min, w_max + 1), random.Next(p_min, p_max + 1));
 
-            knapsacks = new Knapsack[numberOfKnapsacks];
-            for (int i = 0; i < knapsacks.Length; i++)
-                knapsacks[i] = new Knapsack(random.Next(W_min, W_max));
+            Knapsacks = new Knapsack[numberOfKnapsacks];
+            for (int i = 0; i < Knapsacks.Length; i++)
+                Knapsacks[i] = new Knapsack(random.Next(W_min, W_max));
 
 
 
             PrintInitialState();
 
+            GreedyAlgorithm.FillKnapsacks();
 
             Console.ReadKey();
         }
@@ -51,12 +53,12 @@ namespace MultipleKnapsackProblem
             ConsoleTable table = new ConsoleTable("Item nr.", "Weight", "Value");
             table.Options.EnableCount = false;
 
-            foreach (Item i in items)
+            foreach (Item i in Items)
                 table.AddRow(i.Id, i.Weight, i.Value);
             table.Write(Format.MarkDown);
 
             int id = 0;
-            foreach (Knapsack k in knapsacks)
+            foreach (Knapsack k in Knapsacks)
                 Console.WriteLine($"Knapsack #{id++} - Weight Capacity: {k.WeightCapacity}");
 
             Console.WriteLine("------------------------------\n\n");
@@ -68,7 +70,7 @@ namespace MultipleKnapsackProblem
 
             Console.WriteLine($"---Knapsacks---\n\n");
 
-            foreach (Knapsack k in knapsacks)
+            foreach (Knapsack k in Knapsacks)
                 k.Print(id++);
 
             Console.WriteLine($"---------------\n\n\n");
