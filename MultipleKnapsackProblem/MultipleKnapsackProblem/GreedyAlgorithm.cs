@@ -13,7 +13,7 @@ namespace MultipleKnapsackProblem
             Item[] items = Program.Items;
             Knapsack[] knapsacks = Program.Knapsacks;
 
-            for (int i = 0; i < items.Length - 1; i++)
+            for (int i = 0; i < Program.UnusedItems.Count - 1; i++)
             {
                 if (items[i].RelativeBenefit > items[i + 1].RelativeBenefit)
                 {

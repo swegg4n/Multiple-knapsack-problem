@@ -12,10 +12,10 @@ namespace MultipleKnapsackProblem
         public static List<Item> UnusedItems { get; set; } = new List<Item>();
 
 
-        private static Random random = new Random(0);
+        private static Random random = new Random(1);
 
 
-        private static int numberOfItems = 40;
+        private static int numberOfItems = 10;
         private static int numberOfKnapsacks = 3;
 
         private static int w_min = 1;   //min weight
@@ -23,13 +23,12 @@ namespace MultipleKnapsackProblem
         private static int p_min = 1;   //min value
         private static int p_max = 10; //max value
         private static int W_min = 10;  //knapsack min weight capacity
-        private static int W_max = 30; //knapsack max weight capacity
+        private static int W_max = 20; //knapsack max weight capacity
 
 
 
         static void Main(string[] args)
         {
-
             int id = 0;
 
             Items = new Item[numberOfItems];
@@ -43,6 +42,7 @@ namespace MultipleKnapsackProblem
             foreach (Item i in Items)
                 UnusedItems.Add(i);
 
+            PrintP();
 
             PrintInitialState();
 
@@ -88,5 +88,19 @@ namespace MultipleKnapsackProblem
             Console.WriteLine($"---------------\n\n\n");
         }
 
+
+
+        private static void PrintP()
+        {
+            Console.WriteLine("\n---RELATIVE BENEFIT (p)---\n");
+            ConsoleTable table = new ConsoleTable("Weight", "Value", "p");
+
+            List<Item> pItems = Items.OrderBy(i => i.RelativeBenefit).Reverse().ToList<Item>();
+            foreach (var item in pItems)
+                table.AddRow(item.Weight, item.Value, item.RelativeBenefit);
+
+            table.Write(Format.MarkDown);
+            Console.WriteLine("----------------------------\n\n");
+        }
     }
 }
