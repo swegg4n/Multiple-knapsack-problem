@@ -20,9 +20,17 @@ namespace MultipleKnapsackProblem
         {
             this.WeightCapacity = capacity;
         }
+        public Knapsack(Knapsack baseKnapsack)
+        {
+            this.WeightCapacity = baseKnapsack.WeightCapacity;
+            this.Items = new List<Item>();
+
+            foreach (Item i in baseKnapsack.Items)
+                Items.Add(i);
+        }
 
 
-       
+
         /// <summary>
         /// Tries to add an item to the knapsack
         /// </summary>
@@ -34,6 +42,11 @@ namespace MultipleKnapsackProblem
 
             Items.Add(item);
             return true;
+        }
+        public void RemoveItem(Item item)
+        {
+            if (Items.Contains(item))
+                Items.Remove(item);
         }
 
 

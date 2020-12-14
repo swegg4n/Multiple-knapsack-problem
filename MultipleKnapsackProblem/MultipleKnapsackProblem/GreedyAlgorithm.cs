@@ -21,6 +21,7 @@ namespace MultipleKnapsackProblem
                     {
                         if (k.TryAddItem(items[i]) == true)
                         {
+                            Program.UnusedItems.Remove(items[i]);
                             break;
                         }
                     }
@@ -31,6 +32,7 @@ namespace MultipleKnapsackProblem
                     {
                         if (k.TryAddItem(items[i + 1]) == true)
                         {
+                            Program.UnusedItems.Remove(items[i+1]);
                             break;
                         }
                     }
@@ -48,6 +50,7 @@ namespace MultipleKnapsackProblem
             int totalItemsValue = items.Sum(v => v.Value);
             Console.WriteLine($"Total value in all knapsacks: {totalKnapsacksValue}");
             Console.WriteLine($"Total value of all items: {totalItemsValue}");
+            Console.WriteLine($"#Unused items: {Program.UnusedItems.Count}");
             Console.WriteLine("------------------------------\n\n");
         }
     }

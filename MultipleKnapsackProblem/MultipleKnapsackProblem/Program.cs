@@ -1,5 +1,6 @@
 ﻿using ConsoleTables;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MultipleKnapsackProblem
@@ -8,15 +9,17 @@ namespace MultipleKnapsackProblem
     {
         public static Knapsack[] Knapsacks { get; private set; }     //J
         public static Item[] Items { get; private set; }      //I
+        public static List<Item> UnusedItems { get; set; } = new List<Item>();
 
-        private static Random random = new Random();
+
+        private static Random random = new Random(0);
 
 
         private static int numberOfItems = 40;
-        private static int numberOfKnapsacks = 5;
+        private static int numberOfKnapsacks = 3;
 
         private static int w_min = 1;   //min weight
-        private static int w_max = 15;  //max weight
+        private static int w_max = 10;  //max weight
         private static int p_min = 1;   //min value
         private static int p_max = 10; //max value
         private static int W_min = 10;  //knapsack min weight capacity
@@ -26,6 +29,7 @@ namespace MultipleKnapsackProblem
 
         static void Main(string[] args)
         {
+
             int id = 0;
 
             Items = new Item[numberOfItems];
@@ -36,11 +40,19 @@ namespace MultipleKnapsackProblem
             for (int i = 0; i < Knapsacks.Length; i++)
                 Knapsacks[i] = new Knapsack(random.Next(W_min, W_max));
 
+            foreach (Item i in Items)
+                UnusedItems.Add(i);
 
 
             PrintInitialState();
 
             GreedyAlgorithm.FillKnapsacks();
+            NeighborhoodSearch.Solution localOptimalSolution = NeighborhoodSearch.ImprovingSearch(new NeighborhoodSearch.Solution(Knapsacks, UnusedItems), 100);
+            Knapsacks = localOptimalSolution.Knapsacks;
+            UnusedItems = localOptimalSolution.UnusedItems;
+
+            NeighborhoodSearch.Print();
+
 
             Console.ReadKey();
         }
