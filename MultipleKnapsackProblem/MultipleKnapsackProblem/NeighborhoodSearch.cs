@@ -34,15 +34,21 @@ namespace MultipleKnapsackProblem
         public static Solution ImprovingSearch(Solution startSolution)
         {
             List<Solution> neighbors = GetNeighbors(startSolution);
-            List<Solution> sortedNeighbors = neighbors.OrderBy(n => n.TotalCost).Reverse().ToList();
 
-            //foreach (var item in sortedNeighbors)
-            //    Console.WriteLine(item.TotalCost);
+            Solution bestSolution = startSolution;
 
-            if (sortedNeighbors[0].TotalCost <= startSolution.TotalCost)
-                return startSolution;
+            foreach (Solution s in neighbors)
+            {
+                if (s.TotalCost > bestSolution.TotalCost)
+                {
+                    bestSolution = s;
+                }
+            }
 
-            return ImprovingSearch(sortedNeighbors[0]);
+            if (bestSolution == startSolution)
+                return bestSolution;
+
+            return ImprovingSearch(bestSolution);
         }
 
 
@@ -103,11 +109,6 @@ namespace MultipleKnapsackProblem
         //loopa igenom alla Neighborhoods och om vår starting solution har bättre värde än alla andra neighborhood solutions -> break (best local soluton found)
 
         // annars -> välj det neighborhood men bäst value. - repeat
-
-
-
-
-
     }
 }
 

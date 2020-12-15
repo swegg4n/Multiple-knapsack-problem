@@ -12,7 +12,7 @@ namespace MultipleKnapsackProblem
         public static List<Item> UnusedItems { get; set; } = new List<Item>();
 
 
-        private static Random random = new Random(1);
+        private static Random random = new Random();
 
 
         private static int numberOfItems = 10;
