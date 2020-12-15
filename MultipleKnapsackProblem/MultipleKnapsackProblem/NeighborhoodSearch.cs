@@ -31,21 +31,18 @@ namespace MultipleKnapsackProblem
 
 
 
-        public static Solution ImprovingSearch(Solution startSolution, int depth)
+        public static Solution ImprovingSearch(Solution startSolution)
         {
-            if (depth == 0)
-                return startSolution;
-
             List<Solution> neighbors = GetNeighbors(startSolution);
             List<Solution> sortedNeighbors = neighbors.OrderBy(n => n.TotalCost).Reverse().ToList();
 
             //foreach (var item in sortedNeighbors)
             //    Console.WriteLine(item.TotalCost);
 
-            if (sortedNeighbors[0].TotalCost < startSolution.TotalCost)
+            if (sortedNeighbors[0].TotalCost <= startSolution.TotalCost)
                 return startSolution;
 
-            return ImprovingSearch(sortedNeighbors[0], depth - 1);
+            return ImprovingSearch(sortedNeighbors[0]);
         }
 
 

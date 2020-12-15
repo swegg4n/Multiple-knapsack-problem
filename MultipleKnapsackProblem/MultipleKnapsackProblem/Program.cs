@@ -47,7 +47,7 @@ namespace MultipleKnapsackProblem
             PrintInitialState();
 
             GreedyAlgorithm.FillKnapsacks();
-            NeighborhoodSearch.Solution localOptimalSolution = NeighborhoodSearch.ImprovingSearch(new NeighborhoodSearch.Solution(Knapsacks, UnusedItems), 100);
+            NeighborhoodSearch.Solution localOptimalSolution = NeighborhoodSearch.ImprovingSearch(new NeighborhoodSearch.Solution(Knapsacks, UnusedItems));
             Knapsacks = localOptimalSolution.Knapsacks;
             UnusedItems = localOptimalSolution.UnusedItems;
 
